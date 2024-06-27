@@ -1,41 +1,26 @@
 namespace EspacioCalculadora;
 
 public class Calculadora {
-    private double Dato;
-
+    private double dato;
+    public Calculadora() {
+        dato = 0;
+    }
     public double Resultado {
-        get => Dato;
+        get => dato;
     }
     public void Sumar (double Termino) {
-        if (Dato == 0) {
-            Dato = Termino;
-        } else {
-        Dato = Dato + Termino;
-        }
+        dato = dato + Termino;
     }
     public void Restar (double Termino) {
-        if (Dato == 0) {
-            Dato = Termino;
-        } else {
-        Dato = Dato - Termino;
-        }
+        dato = dato - Termino;
     }
     public void Multiplicar (double Termino) {
-        if (Dato == 0) {
-            Dato = Termino;
-        } else {
-        Dato = Dato * Termino;
-        }
+        dato = dato * Termino;
     }
     public void Dividir (double Termino) {
-        if (Dato == 0) {
-            Dato = Termino;
-        } else {
-        Dato = Dato / Termino;
-        }
+        dato = dato / Termino;
     }
-
     public void Limpiar () {
-        Dato = 0;
+        dato = 0;
     }
 }
