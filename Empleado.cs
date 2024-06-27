@@ -9,6 +9,16 @@ class Empleado {
     private double sueldoBasico;
     private Cargos cargo;
 
+    public Empleado(string nomb, string ape, DateTime fecN, char est, DateTime fecI, double sueldo, Cargos car) {
+        nombre = nomb;
+        apellido = ape;
+        fechaNac = fecN;
+        estadoCivil = est;
+        fechaIng = fecI;
+        sueldoBasico = sueldo;
+        cargo = car;
+    }
+
     public string Nombre { get => nombre; set => nombre = value; }
     public string Apellido { get => apellido; set => apellido = value; }
     public DateTime FechaNac { get => fechaNac; set => fechaNac = value; }
@@ -17,12 +27,18 @@ class Empleado {
     public double SueldoBasico { get => sueldoBasico; set => sueldoBasico = value; }
     internal Cargos Cargo { get => cargo; set => cargo = value; }
     public int antiguedad() {
-        TimeSpan diferencia = DateTime.Today - fechaIng;
-        return (diferencia.Days)/365;
+        int ant = DateTime.Today.Year - fechaIng.Year;
+        if (DateTime.Today.Month < fechaIng.Month || ((DateTime.Today.Month == fechaIng.Month) && (DateTime.Today.Day < fechaIng.Day))) {
+            ant--;
+        }
+        return ant;
     }
     public int edad() {
-        TimeSpan edad = DateTime.Today - fechaNac;
-        return (edad.Days)/365;
+        int edad = DateTime.Today.Year - fechaNac.Year;
+        if (DateTime.Today.Month < fechaNac.Month || ((DateTime.Today.Month == fechaNac.Month) && (DateTime.Today.Day < fechaNac.Day))) {
+            edad--;
+        }
+        return edad;
     }
     public int aniosParaJubilarse() {
         return 65-edad();
@@ -32,12 +48,12 @@ class Empleado {
         if (antiguedad()<21) {
             adicional = sueldoBasico * 0.01 * antiguedad();
         } else {
-            adicional = sueldoBasico * 1.25;
+            adicional = sueldoBasico * 0.25;
         }
         if (cargo == Cargos.Ingeniero || cargo == Cargos.Especialista) {
-            adicional = 1.5 * adicional;
+            adicional *= 1.5;
         }
-        if (estadoCivil.Equals("C")) {
+        if (estadoCivil.Equals('C')) {
             adicional += 150000;
         }
         return sueldoBasico + adicional;
